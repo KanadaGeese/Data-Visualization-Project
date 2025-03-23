@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NBA Player Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    #controls {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    svg {
+      margin: 20px 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>NBA Player Stats Visualization</h1>
+    <div id="controls">
+      <label for="playerSelect">Select Player:</label>
+      <select id="playerSelect"></select>
+      <label for="seasonSelect">Select Season:</label>
+      <select id="seasonSelect"></select>
+    </div>
+
+    <h2>1. Map of Where Player Played</h2>
+    <svg id="map" width="800" height="400"></svg>
+
+    <h2>2. Player Comparison</h2>
+    <div class="charts">
+      <svg id="pointsMinutes" width="500" height="300"></svg>
+      <svg id="rebounds" width="500" height="300"></svg>
+    </div>
+
+    <h2>3. Shot Type Pie Chart</h2>
+    <svg id="pieChart" width="400" height="400"></svg>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
