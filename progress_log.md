@@ -8,5 +8,5 @@
 - March 9th : Readme File update
 - March 19th : Website index.html and style.css 
 - March 21st : Scoping Document and Readme File Update
-- March 22nd : D3.js learning
-- 
+- March 22nd : D3.js learning - Youtube
+- March 23rd : v1.0 Website
