@@ -43,6 +43,8 @@ const TEAM_MAP = {
   
     const playerSelect = d3.select("#playerSelect");
     const seasonSelect = d3.select("#seasonSelect");
+    
+
   
     playerSelect.selectAll("option")
       .data(players)
@@ -56,11 +58,33 @@ const TEAM_MAP = {
       .append("option")
       .text(d => d);
   
-    playerSelect.on("change", updateAll);
+    playerSelect.on("change", () => {
+      updateSeasonOptions();
+      updateAll();
+    });
+      
     seasonSelect.on("change", updateAll);
-  
+    updateSeasonOptions();
     updateAll();
-  });
+    });
+
+  function updateSeasonOptions() {
+    const player = d3.select("#playerSelect").property("value");
+    const playerSeasons = data
+      .filter(d => d.Player === player)
+      .map(d => d.Season);
+  
+    const uniqueSeasons = Array.from(new Set(playerSeasons)).sort((a, b) => a - b);
+  
+    const seasonSelect = d3.select("#seasonSelect");
+    seasonSelect.selectAll("option").remove();
+  
+    seasonSelect.selectAll("option")
+      .data(uniqueSeasons)
+      .enter()
+      .append("option")
+      .text(d => d);
+  }
   
   function updateAll() {
     const player = d3.select("#playerSelect").property("value");
@@ -79,26 +103,48 @@ const TEAM_MAP = {
     const svg = d3.select("#map");
     svg.selectAll("*").remove();
   
-    const playerTeams = data.filter(d => d.Player === player).map(d => d.Team);
-    const cities = Array.from(new Set(playerTeams)).map(code => TEAM_MAP[code]).filter(Boolean);
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
   
-    const projection = d3.geoAlbersUsa().translate([400, 200]).scale(1000);
+    const projection = d3.geoAlbersUsa().translate([width / 2, height / 2]).scale(1000);
+    const path = d3.geoPath().projection(projection);
   
-    svg.selectAll("circle")
-      .data(cities)
-      .enter()
-      .append("circle")
-      .attr("cx", d => projection([d.lon, d.lat])[0])
-      .attr("cy", d => projection([d.lon, d.lat])[1])
-      .attr("r", 6)
-      .attr("fill", "#4e79a7")
-      .append("title")
-      .text(d => d.city);
+    // Load and draw the map
+    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(us => {
+      const states = topojson.feature(us, us.objects.states).features;
+  
+      svg.append("g")
+        .selectAll("path")
+        .data(states)
+        .enter()
+        .append("path")
+        .attr("d", path)
+        .attr("fill", "#f0f0f0")
+        .attr("stroke", "#999");
+  
+      // Plot team cities
+      const playerTeams = data.filter(d => d.Player === player).map(d => d.Team);
+      const cities = Array.from(new Set(playerTeams)).map(code => TEAM_MAP[code]).filter(Boolean);
+  
+      svg.selectAll("circle")
+        .data(cities)
+        .enter()
+        .append("circle")
+        .attr("cx", d => projection([d.lon, d.lat])[0])
+        .attr("cy", d => projection([d.lon, d.lat])[1])
+        .attr("r", 6)
+        .attr("fill", "#4e79a7")
+        .append("title")
+        .text(d => d.city);
+    });
   }
   
+    
   function drawComparison(playerRow) {
+    
     const svg1 = d3.select("#pointsMinutes").selectAll("*").remove();
     const svg2 = d3.select("#rebounds").selectAll("*").remove();
+    
   
     const sameSeason = data.filter(d => d.Season === playerRow.Season);
   
@@ -114,15 +160,55 @@ const TEAM_MAP = {
     // Find teammate with same position
     const teammate = sameSeason.find(d => d.Team === playerRow.Team && d.Pos === playerRow.Pos && d.Player !== playerRow.Player);
   
+  
     const compareData = [playerRow, similar, teammate].filter(Boolean);
     const labels = ["Selected", "Similar", "Teammate"];
+    const names = compareData.map(p => p.Player);
+
+    // 👤 Player name labels
+    d3.select("#compareLabels").html(`
+      🔹 <strong>Selected:</strong> ${names[0] || "N/A"} &nbsp;&nbsp;
+      🔸 <strong>Similar:</strong> ${names[1] || "N/A"} &nbsp;&nbsp;
+      👥 <strong>Teammate:</strong> ${names[2] || "N/A"}
+    `);
+
+    // 📋 Player summary cards
+    const summaryHTML = compareData.map((p, i) => `
+      <div style="flex:1; background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); text-align:left;">
+        <h3 style="margin:0 0 10px 0;">${labels[i]}</h3>
+        <p><strong>${p.Player}</strong> — ${p.Team} (${p.Season})</p>
+        <p><b>Pos:</b> ${p.Pos}</p>
+        <p><b>Points:</b> ${p.Points}</p>
+        <p><b>Minutes:</b> ${p.MP}</p>
+        <p><b>Rebounds:</b> ${p.TRB}</p>
+        <p><b>Assists:</b> ${p.AST}</p>
+        <p><b>FG%:</b> ${(p["FG%"] * 100).toFixed(1)}%</p>
+      </div>
+    `).join("");
+
+    d3.select("#compareSummaries").html(summaryHTML);
+
+
+    d3.select("#compareLabels").html(`
+      🔹 <strong>Selected:</strong> ${names[0] || "N/A"} &nbsp;&nbsp;
+      🔸 <strong>Similar:</strong> ${names[1] || "N/A"} &nbsp;&nbsp;
+      👥 <strong>Teammate:</strong> ${names[2] || "N/A"}
+    `);
   
     // Bar chart for Points and MP
     const svgPM = d3.select("#pointsMinutes");
     const w = +svgPM.attr("width"), h = +svgPM.attr("height"), m = 40;
     const x = d3.scaleBand().domain(labels).range([m, w - m]).padding(0.3);
     const y = d3.scaleLinear().domain([0, d3.max(compareData, d => Math.max(d.Points, d.MP))]).range([h - m, m]);
-  
+
+    svgPM.append("text")
+      .attr("x", w / 2)
+      .attr("y", 20)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .text("Points vs Minutes Played");
+
     svgPM.append("g").attr("transform", `translate(0,${h - m})`).call(d3.axisBottom(x));
     svgPM.append("g").attr("transform", `translate(${m},0)`).call(d3.axisLeft(y));
   
@@ -151,7 +237,15 @@ const TEAM_MAP = {
     const y2 = d3.scaleLinear().domain([0, d3.max(compareData, d => d.TRB)]).range([h - m, m]);
     svgTRB.append("g").attr("transform", `translate(0,${h - m})`).call(d3.axisBottom(x));
     svgTRB.append("g").attr("transform", `translate(${m},0)`).call(d3.axisLeft(y2));
-  
+    
+    svgTRB.append("text")
+    .attr("x", w / 2)
+    .attr("y", 20)
+    .attr("text-anchor", "middle")
+    .style("font-size", "16px")
+    .style("font-weight", "bold")
+    .text("Total Rebounds Comparison");
+
     svgTRB.selectAll(".bar")
       .data(compareData)
       .enter()
@@ -166,13 +260,19 @@ const TEAM_MAP = {
   function drawPie(playerRow) {
     const svg = d3.select("#pieChart");
     svg.selectAll("*").remove();
-  
+    
+    
+
+
+
     const totalPoints = playerRow.Points;
     const p2 = playerRow["2P"] * 2;
     const p3 = playerRow["3P"] * 3;
+    const p4 = playerRow["Points"] - playerRow["3P"] * 3 - playerRow["2P"] * 2;
     const pieData = [
       { label: "2P Points", value: p2 },
-      { label: "3P Points", value: p3 }
+      { label: "3P Points", value: p3 },
+      { label: "Free Throws",value: p4 }
     ];
   
     const w = +svg.attr("width"), h = +svg.attr("height");
@@ -180,10 +280,19 @@ const TEAM_MAP = {
   
     const pie = d3.pie().value(d => d.value);
     const arc = d3.arc().innerRadius(0).outerRadius(radius);
-    const color = d3.scaleOrdinal(["#59a14f", "#edc949"]);
+    const color = d3.scaleOrdinal(["#59a14f", "#edc949", "#4646E4"]);
   
     const g = svg.append("g").attr("transform", `translate(${w / 2},${h / 2})`);
   
+    svg.append("text")
+      .attr("x", w / 2)
+      .attr("y", 20)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .text("Scoring Breakdown: 2P, 3P, FT");
+    
+      
     g.selectAll("path")
       .data(pie(pieData))
       .enter()

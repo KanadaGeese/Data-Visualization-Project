@@ -10,26 +10,6 @@
         <div id="header">
             <h1> Track NBA Players </h1>
             <img src="NBA_logo.png" alt="Logo" class="logo">
-
-
-        <!--The D3.js section-->
-        <svg width="500" height="300"></svg>
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-        <script>
-            const data = [10, 40, 30, 80];
-            
-            const svg = d3.select("svg");
-            
-            svg.selectAll("rect")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("x", (d, i) => i * 60)
-                .attr("y", d => 300 - d)                  
-                .attr("width", 50)
-                .attr("height", d => d)
-                .attr("fill", "orange");
-        </script>
     </body>
     
 
