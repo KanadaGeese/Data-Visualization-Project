@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top NBA Scorers</title>
+  <link rel="stylesheet" href="interact_map.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+<header>
+    <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
+    <p>The unofficial homepage of the National Basketball Data Visualization Institute</p>
+    </header>
+    
+    <nav>
+      <a href="interact_map.html">General</a>
+      <a href="Dashboard.html">Dashboard</a>
+      <a href="Homepage.html#about">About</a>
+      <a href="Homepage.html#teams">Teams</a>
+      <a href="Homepage.html#history">History</a>
+      <a href="Homepage.html#contact">Contact</a>
+      <a href="Glossary.html">Glossary</a>
+    </nav>
+
+  <div id="controls">
+    <button id="prevBtn">⏮️ Prev</button>
+    <button id="playBtn">▶️ Play</button>
+    <button id="pauseBtn">⏸️ Pause</button>
+    <button id="nextBtn">⏭️ Next</button>
+    <span id="seasonDisplay">Season: </span>
+  </div>
+  <div id="chart-container">
+    <svg id="barChart" width="800" height="500"></svg>
+  </div>
+  <script src="interact_map.js"></script>
+</body>
+</html>

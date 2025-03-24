@@ -302,3 +302,82 @@ const TEAM_MAP = {
       .append("title")
       .text(d => `${d.data.label}: ${((d.data.value / totalPoints) * 100).toFixed(1)}%`);
   }
+
+// Search Bar Feature
+const openBtn = document.getElementById('openSearch');
+const overlay = document.getElementById('overlay');
+const popup = document.getElementById('searchPopup');
+const searchInput = document.getElementById('searchInput');
+const suggestionsBox = document.getElementById('suggestions');
+
+let names = [];
+
+// Fetch and parse only the first column (name)
+fetch('../EDA NBA/nba_player_stats_C_Rami.csv')
+  .then(res => res.text())
+  .then(data => {
+    const lines = data.split('\n');
+    names = lines.map(line => line.split(',')[0].trim()).filter(n => n);
+  });
+
+
+  
+// Show popup
+openBtn.addEventListener('click', () => {
+  overlay.classList.remove('hidden');
+  popup.classList.remove('hidden');
+  searchInput.value = '';
+  searchInput.focus();
+  suggestionsBox.innerHTML = '';
+});
+
+// Hide popup when clicking outside
+overlay.addEventListener('click', () => {
+  overlay.classList.add('hidden');
+  popup.classList.add('hidden');
+});
+
+// Live filter suggestions
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = names.filter(name => name.toLowerCase().includes(query)).slice(0, 10);
+  suggestionsBox.innerHTML = filtered.map(name => `<li>${name}</li>`).join('');
+});
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = names.filter(name => name.toLowerCase().includes(query)).slice(0, 10);
+
+  // Clear previous suggestions
+  suggestionsBox.innerHTML = '';
+
+  // Create clickable suggestions
+  filtered.forEach(name => {
+    const li = document.createElement('li');
+    li.textContent = name;
+    li.addEventListener('click', () => {
+      searchInput.value = name;
+      overlay.classList.add('hidden');
+      popup.classList.add('hidden');
+      suggestionsBox.innerHTML = '';
+    
+      // Select the name in the hidden player dropdown
+      d3.select("#playerSelect").property("value", name);
+    
+      // Update season dropdown based on this player
+      updateSeasonOptions();
+    
+      // Automatically select the latest season
+      const seasonOptions = d3.select("#seasonSelect").selectAll("option").nodes();
+      if (seasonOptions.length > 0) {
+        const lastSeason = seasonOptions[seasonOptions.length - 1].value;
+        d3.select("#seasonSelect").property("value", lastSeason);
+      }
+    
+      // Trigger the full dashboard update
+      updateAll();
+    });
+    
+    suggestionsBox.appendChild(li);
+  });
+});

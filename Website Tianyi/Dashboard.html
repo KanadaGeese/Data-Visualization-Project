@@ -7,18 +7,46 @@
   <link rel="icon" type="image/png" href="NBA_logo.png" />
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/topojson@3"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
 
 </head>
 
 <body>
-  <div class="container">
-    <h1>NBA Player Stats Visualization</h1>
+  <header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
+
     <div id="controls">
-      <label for="playerSelect">Select Player:</label>
-      <select id="playerSelect"></select>
-      <label for="seasonSelect">Select Season:</label>
-      <select id="seasonSelect"></select>
-    </div>
+    <button id="openSearch" class="search-button" title="Search">
+    <i class="fas fa-search"></i></button>
+
+    <div class="overlay hidden" id="overlay"></div>
+    <div class="search-popup hidden" id="searchPopup">
+    <input type="text" id="searchInput" placeholder="Type a name..." autocomplete="off" />
+    <ul id="suggestions"></ul>
+
+    <label for="seasonSelect">Select Season:</label>
+    <select id="seasonSelect"></select>
+    </div></div>
+  
+    <script src="script.js"></script>
+  </header>
+
+  <nav>
+    <a href="interact_map.html">General</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="Homepage.html#about">About</a>
+    <a href="Homepage.html#teams">Teams</a>
+    <a href="Homepage.html#history">History</a>
+    <a href="Homepage.html#contact">Contact</a>
+    <a href="Glossary.html">Glossary</a>
+  </nav>
+
+    <select id="playerSelect" style="display: none;"></select>
+
+  
+    <h1>NBA Player Stats Visualization</h1>
 
     <h2>1. Map of Where Player Played</h2>
     <svg id="map" width="800" height="400"></svg>
