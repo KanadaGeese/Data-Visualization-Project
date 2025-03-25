@@ -130,8 +130,6 @@ nav a:hover {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-
 }
 
 .big_box {
@@ -139,16 +137,13 @@ nav a:hover {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-
 }
-
-/*Map Chart*/
-svg {
-  border: 1px solid #ccc;
+.player-photo-profile {
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
   border-radius: 10px;
-  padding : 20px;
-
+  margin-bottom: 10px;
 }
 
 
