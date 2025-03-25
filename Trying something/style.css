@@ -1,0 +1,66 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #222;
+  }
+  svg {
+    background-color: #eaf4ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+  
+  .country {
+    fill: #f2f2f2;
+    stroke: #ddd;
+    stroke-width: 0.5;
+  }
+  
+  .state-outline {
+    stroke: #bbb;
+    stroke-width: 0.5;
+    fill: none;
+  }
+  
+  .team-logo {
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+    transition: transform 0.2s ease;
+  }
+  .team-logo:hover {
+    transform: scale(1.1);
+  }
+  input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 250px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #0077ff;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  button:hover {
+    background-color: #005fcc;
+  }
+  .slider-label:hover {
+    background-color: #0077ff;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+   
+  .team-node {
+    transition: transform 0.3s ease, fill 0.3s ease;
+  }
+  .team-node:hover {
+    transform: scale(1.2);
+    fill: #ff5c5c;
+  }
+  
