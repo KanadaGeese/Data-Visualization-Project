@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NBA Player Dashboard</title>
+  <link rel="stylesheet" href="Dashboardstyle.css" />
+  <link rel="icon" type="image/png" href="NBA_logo.png" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
+</head>
+
+<body>
+  <!--The critical Point of the Website-->
+  <header>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
+
+    <div id="controls">
+    <button id="openSearch" class="search-button" title="Search">
+    <i class="fas fa-search"></i></button>
+
+    <div class="overlay hidden" id="overlay"></div>
+    <div class="search-popup hidden" id="searchPopup">
+    <input type="text" id="searchInput" placeholder="Type a name..." autocomplete="off" />
+    <ul id="suggestions"></ul>
+
+    <label for="seasonSelect">Select Season:</label>
+    <select id="seasonSelect"></select>
+    </div></div>
+  
+    <script src="script.js"></script>
+  </header>
+
+  <nav>
+    <a href="interact_map.html">General</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="Homepage.html#about">About</a>
+    <a href="Homepage.html#teams">Teams</a>
+    <a href="Homepage.html#history">History</a>
+    <a href="Homepage.html#contact">Contact</a>
+    <a href="Glossary.html">Glossary</a>
+  </nav>
+
+  <select id="playerSelect" style="display: none;"></select>
+
+  <!--Enf of Critical Section of Website-->
+
+  <!--Start Section 2-->
+
+  <!--Player Information containers-->
+  <div class="flex-container">
+    <div class="small_box">  
+      <!--I want to add a picture of the player according to who we have chosen-->
+      <img src="images/players/Kobe Bryant.jpg" alt="Kobe Bryant" class="player-photo">
+      <!--I want to add a player description according to who we have chosen-->
+      <p>Kobe Bryant<br>Points: 30.1</p></div>
+    <div class="big_box">This container will have player description. The one on the right side, his picture</div>
+  </div>
+  
+  <!--Map Chart-->
+  <svg id="map" width="1120" height="500"></svg>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

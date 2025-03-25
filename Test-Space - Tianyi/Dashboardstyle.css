@@ -1,0 +1,159 @@
+/*Critical Section*/
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    text-align: center;
+    padding: 20px;
+}
+
+header {
+  background-color: #1d428a;
+  color: white;
+  padding: 20px 40px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+nav {
+  background-color: #c8102e;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px 0;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+/*End of Critical Section*/
+
+/*Search Bar*/
+#openSearch {
+  margin: 40px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
+.search-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.39);
+  padding: 20px;
+  width: 800px;
+  border-radius: 10px;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+}
+
+.search-popup input {
+  width: 100%;
+  padding: 10px;
+  font-size: 40px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#suggestions li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#suggestions li:hover {
+  background-color: #26308B;
+  transition: background-color 0.18s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+.search-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #800020;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: background 0.3s ease;
+}
+
+.search-button:hover {
+  background: #a83232;
+}
+
+/*End*/
+
+/*Start 2nd Section */
+.flex-container {
+  display: flex;
+  gap: 20px;
+  padding:20px;
+}
+
+.small_box {
+  width: 200px; /* fixed smaller width */
+  height : 225px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+
+}
+
+.big_box {
+  flex: 1; /* takes all remaining space */
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+
+}
+
+/*Map Chart*/
+svg {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding : 20px;
+
+}
+
+
+
+
+
+  
+  
