@@ -63,7 +63,48 @@
   <!--Map Chart-->
   <svg id="map" width="1120" height="500"></svg>
 
+  <!--Radio Chart & Points Chart-->
+  <div class="player_stat_boxs">
+  <div class="charts_boxs">
+    <svg id="pieChart" width="300" height="300"></svg>
+
+  </div>
+  <div class="charts_boxs">The Point Counts Chart</div>
+  </div>
+
+  <!--Radio Chart & Points Chart-->
+  <div class="player_stat_boxs">
+    <div class="charts_boxs">Selected Player With similar Performance
+      <div class="circle-overlay">99</div>
+      <img src="images/players/Kobe Bryant.jpg" class="player-icon">
+    </div>
+    <div class="charts_boxs">Selected Player in same team with identical Position
+      <div class="circle-overlay">98</div>
+      <img src="images/players/Kobe Bryant.jpg" class="player-icon">
+    </div>
+  </div>
+  <div id="add_player_to_compare">
+    <input type="text" id="searchInput" placeholder="Add someone to Compare" autocomplete="off" />
+    <ul id="suggestions"></ul>
+      
+    <label for="seasonSelect">Select Season:</label>
+    <select id="seasonSelect"></select>  
+  </div>
+  <svg id="map" width="1120" height="300"></svg> <!--Player 16:9 Picture-->
+  
+  <div class="player_stat_boxs">
+    <div class="charts_boxs">
+      <svg id="radio-chart" width="500" height="300"></svg>
+    </div>
+    <div class="charts_boxs">  
+      <svg id="rebounds" width="500" height="300"></svg>
+    </div>
+  </div>
+
+  <a href="interact_map.html" class="info-button" target="_blank">More Information</a>
 
   <script src="script.js"></script>
+
+
 </body>
 </html>

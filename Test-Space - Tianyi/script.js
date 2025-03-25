@@ -153,14 +153,10 @@ const TEAM_MAP = {
   
     
   function drawComparison(playerRow) {
-    
-    const svg1 = d3.select("#pointsMinutes").selectAll("*").remove();
-    const svg2 = d3.select("#rebounds").selectAll("*").remove();
-    
+    d3.select("#radio-chart").selectAll("*").remove();
   
     const sameSeason = data.filter(d => d.Season === playerRow.Season);
   
-    // Find most similar player (closest Points)
     const similar = sameSeason.reduce((acc, cur) => {
       if (cur.Player !== playerRow.Player) {
         const diff = Math.abs(cur.Points - playerRow.Points);
@@ -169,25 +165,16 @@ const TEAM_MAP = {
       return acc;
     }, null);
   
-    // Find teammate with same position
     const teammate = sameSeason.find(d => d.Team === playerRow.Team && d.Pos === playerRow.Pos && d.Player !== playerRow.Player);
-  
   
     const compareData = [playerRow, similar, teammate].filter(Boolean);
     const labels = ["Selected", "Similar", "Teammate"];
     const names = compareData.map(p => p.Player);
-
-    // 👤 Player name labels
-    d3.select("#compareLabels").html(`
-      🔹 <strong>Selected:</strong> ${names[0] || "N/A"} &nbsp;&nbsp;
-      🔸 <strong>Similar:</strong> ${names[1] || "N/A"} &nbsp;&nbsp;
-      👥 <strong>Teammate:</strong> ${names[2] || "N/A"}
-    `);
-
-    // 📋 Player summary cards
+  
+    // Show summary cards
     const summaryHTML = compareData.map((p, i) => `
       <div style="flex:1; background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); text-align:left;">
-        <h3 style="margin:0 0 10px 0;">${labels[i]}</h3>
+        <h3>${labels[i]}</h3>
         <p><strong>${p.Player}</strong> — ${p.Team} (${p.Season})</p>
         <p><b>Pos:</b> ${p.Pos}</p>
         <p><b>Points:</b> ${p.Points}</p>
@@ -197,79 +184,143 @@ const TEAM_MAP = {
         <p><b>FG%:</b> ${(p["FG%"] * 100).toFixed(1)}%</p>
       </div>
     `).join("");
-
+  
     d3.select("#teammate-info").html(summaryHTML.includes("Teammate") ? summaryHTML.split('</div>')[2] + '</div>' : "<p>No teammate found.</p>");
     d3.select("#similar-player-info").html(summaryHTML.includes("Similar") ? summaryHTML.split('</div>')[1] + '</div>' : "<p>No similar player found.</p>");
-    
-
-
-    d3.select("#compareLabels").html(`
-      🔹 <strong>Selected:</strong> ${names[0] || "N/A"} &nbsp;&nbsp;
-      🔸 <strong>Similar:</strong> ${names[1] || "N/A"} &nbsp;&nbsp;
-      👥 <strong>Teammate:</strong> ${names[2] || "N/A"}
-    `);
   
-    // Bar chart for Points and MP
-    const svgPM = d3.select("#pointsMinutes");
-    const w = +svgPM.attr("width"), h = +svgPM.attr("height"), m = 40;
-    const x = d3.scaleBand().domain(labels).range([m, w - m]).padding(0.3);
-    const y = d3.scaleLinear().domain([0, d3.max(compareData, d => Math.max(d.Points, d.MP))]).range([h - m, m]);
+    // Radar Chart Stats
+    const stats = ["Points", "MP", "TRB", "AST", "FG%"];
+    const radarData = compareData.map(p => ({
+      name: p.Player,
+      values: stats.map(stat => stat === "FG%" ? (p["FG%"] * 100) : p[stat])
+    }));
+  
+    const svg = d3.select("#radio-chart");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+    const radius = Math.min(width, height) / 2 - 40;
+  
+    const g = svg.append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
+  
+    const angleSlice = (2 * Math.PI) / stats.length;
+  
+    // Scales
+    const maxValue = d3.max(radarData.flatMap(d => d.values));
+    const rScale = d3.scaleLinear().domain([0, maxValue]).range([0, radius]);
+  
+    // Radar grid lines
+    const levels = 5;
+    for (let level = 1; level <= levels; level++) {
+      const r = radius * (level / levels);
+      g.append("circle")
+        .attr("r", r)
+        .attr("fill", "none")
+        .attr("stroke", "#ccc");
+    }
+  
+    // Axis lines and labels
+    stats.forEach((stat, i) => {
+      const angle = i * angleSlice - Math.PI / 2;
+      const x = rScale(maxValue) * Math.cos(angle);
+      const y = rScale(maxValue) * Math.sin(angle);
+  
+      g.append("line")
+        .attr("x1", 0).attr("y1", 0)
+        .attr("x2", x).attr("y2", y)
+        .attr("stroke", "#aaa");
+  
+      g.append("text")
+        .attr("x", x * 1.1)
+        .attr("y", y * 1.1)
+        .attr("text-anchor", "middle")
+        .attr("dy", "0.35em")
+        .style("font-size", "12px")
+        .text(stat);
+    });
+  
+    // Radar paths
+    const line = d3.lineRadial()
+      .radius(d => rScale(d.value))
+      .angle((d, i) => i * angleSlice)
+      .curve(d3.curveLinearClosed);
+  
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+  
+    radarData.forEach((player, i) => {
+      g.append("path")
+        .datum(player.values.map((v, j) => ({ axis: stats[j], value: v })))
+        .attr("fill", color(i))
+        .attr("fill-opacity", 0.1)
+        .attr("stroke", color(i))
+        .attr("stroke-width", 2)
+        .attr("d", line);
+    });
+  
+    // Legend (optional)
+    const legend = svg.append("g")
+      .attr("transform", `translate(20, 20)`);
+  
+    radarData.forEach((d, i) => {
+      legend.append("circle")
+        .attr("cx", 0)
+        .attr("cy", i * 20)
+        .attr("r", 5)
+        .attr("fill", color(i));
+  
+      legend.append("text")
+        .attr("x", 10)
+        .attr("y", i * 20 + 5)
+        .text(labels[i])
+        .style("font-size", "12px");
+    });
+        // =============== REBOUND BAR CHART ================
+    const svgTRB = d3.select("#rebounds");
+    svgTRB.selectAll("*").remove();
 
-    svgPM.append("text")
+    const w = +svgTRB.attr("width");
+    const h = +svgTRB.attr("height");
+    const margin = 40;
+
+    const x = d3.scaleBand()
+      .domain(labels)
+      .range([margin, w - margin])
+      .padding(0.3);
+
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(compareData, d => d.TRB)])
+      .range([h - margin, margin]);
+
+    // Axis
+    svgTRB.append("g")
+      .attr("transform", `translate(0, ${h - margin})`)
+      .call(d3.axisBottom(x));
+
+    svgTRB.append("g")
+      .attr("transform", `translate(${margin}, 0)`)
+      .call(d3.axisLeft(y));
+
+    // Title
+    svgTRB.append("text")
       .attr("x", w / 2)
       .attr("y", 20)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
       .style("font-weight", "bold")
-      .text("Points vs Minutes Played");
+      .text("Total Rebounds Comparison");
 
-    svgPM.append("g").attr("transform", `translate(0,${h - m})`).call(d3.axisBottom(x));
-    svgPM.append("g").attr("transform", `translate(${m},0)`).call(d3.axisLeft(y));
-  
-    svgPM.selectAll(".bar")
-      .data(compareData)
-      .enter()
-      .append("rect")
-      .attr("x", (d, i) => x(labels[i]))
-      .attr("y", d => y(d.Points))
-      .attr("width", x.bandwidth() / 2)
-      .attr("height", d => y(0) - y(d.Points))
-      .attr("fill", "#59a14f");
-  
-    svgPM.selectAll(".line")
-      .data(compareData)
-      .enter()
-      .append("rect")
-      .attr("x", (d, i) => x(labels[i]) + x.bandwidth() / 2)
-      .attr("y", d => y(d.MP))
-      .attr("width", x.bandwidth() / 2)
-      .attr("height", d => y(0) - y(d.MP))
-      .attr("fill", "#edc949");
-  
-    // Bar chart for TRB
-    const svgTRB = d3.select("#rebounds");
-    const y2 = d3.scaleLinear().domain([0, d3.max(compareData, d => d.TRB)]).range([h - m, m]);
-    svgTRB.append("g").attr("transform", `translate(0,${h - m})`).call(d3.axisBottom(x));
-    svgTRB.append("g").attr("transform", `translate(${m},0)`).call(d3.axisLeft(y2));
-    
-    svgTRB.append("text")
-    .attr("x", w / 2)
-    .attr("y", 20)
-    .attr("text-anchor", "middle")
-    .style("font-size", "16px")
-    .style("font-weight", "bold")
-    .text("Total Rebounds Comparison");
-
+    // Bars
     svgTRB.selectAll(".bar")
       .data(compareData)
       .enter()
       .append("rect")
       .attr("x", (d, i) => x(labels[i]))
-      .attr("y", d => y2(d.TRB))
+      .attr("y", d => y(d.TRB))
       .attr("width", x.bandwidth())
-      .attr("height", d => y2(0) - y2(d.TRB))
+      .attr("height", d => y(0) - y(d.TRB))
       .attr("fill", "#4e79a7");
+
   }
+  
   
   function drawPie(playerRow) {
     const svg = d3.select("#pieChart");
@@ -315,6 +366,7 @@ const TEAM_MAP = {
       .attr("fill", d => color(d.data.label))
       .append("title")
       .text(d => `${d.data.label}: ${((d.data.value / totalPoints) * 100).toFixed(1)}%`);
+    
   }
 
 // Search Bar Feature

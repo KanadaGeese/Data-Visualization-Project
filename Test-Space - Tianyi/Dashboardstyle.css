@@ -130,6 +130,8 @@ nav a:hover {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
 }
 
 .big_box {
@@ -137,6 +139,8 @@ nav a:hover {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
 }
 .player-photo-profile {
   width: 150px;
@@ -144,9 +148,77 @@ nav a:hover {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
 }
 
+/*Map Container*/
+#map{
+  flex: 1; /* takes all remaining space */
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 
+}
+
+.player_stat_boxs {
+  position:relative;
+  display: flex;
+  gap: 20px; /* space between boxes */
+  padding:20px;
+}
+
+/* Circle badge */
+.circle-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: crimson;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Makes it a circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.charts_boxs {
+  flex: 1; /* they take equal width */
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  height:300px;
+}
+
+.player-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/*More Info Button*/
+.info-button {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #1d428a;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.info-button:hover {
+  background-color: #c8102e;
+  text-decoration: underline;
+}
 
 
 
