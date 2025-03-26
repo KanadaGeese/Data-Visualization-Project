@@ -262,4 +262,10 @@ nav a:hover {
 }
 
   
-  
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #1d428a;
+  color: white;
+  margin-top: 40px;
+}

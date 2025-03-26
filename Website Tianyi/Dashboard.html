@@ -1,41 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!--Notes on Comments : For some sections, we may add an ID number to detail. 
+- HT : HTML document
+- JS : Javascript document
+- CS : CSS document
+
+Follwing ID giving : XX(3)NN
+- X: letter
+- N : Number 
+
+JS(3) can be given for D3.js explanation-->
+
+
 <head>
   <meta charset="UTF-8" />
   <title>NBA Player Dashboard</title>
-  <link rel="stylesheet" href="Dashboardstyle.css" />
-  <link rel="icon" type="image/png" href="NBA_logo.png" />
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://unpkg.com/topojson@3"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="Dashboardstyle.css" /> <!--Links to the CSS file. There are multiple-->
+  <link rel="icon" type="image/png" href="NBA_logo.png" /> 
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /> <!--CDN for search icon-->
+  <script src="https://d3js.org/d3.v7.min.js"></script> <!--D3.js with a CDN-->
+
+
+  <script src="https://unpkg.com/topojson@3"></script> <!--TopoJSON, extension of GeoJSON for encoding geographical data-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Screen Responsiveness-->
+
 
 
 </head>
 
 <body>
-  <!--The critical Point of the Website-->
+  <!--Header of the Website Page-->
+  <!--HT03-->
+
   <header>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
+    <h1>
+      <span style="color : whitesmoke">NBA Data Visualization Platform</span>
+    </h1>
 
     <a href="Homepage.html">    
-      <img id="homepage_img" src="NBA_logo.png" height="100px">
+      <img id="homepage_img" src="NBA_logo.png" height="100px"> <!--Clickable Homepage Button-->
     </a>
+
+
     <div id="controls">
-    <button id="openSearch" class="search-button" title="Search">
-    <i class="fas fa-search"></i></button>
+      <button id="openSearch" class="search-button" title="Search">
+      <i class="fas fa-search"></i>
+      </button>
 
-    <div class="overlay hidden" id="overlay"></div>
-    <div class="search-popup hidden" id="searchPopup">
-    <input type="text" id="searchInput" placeholder="Type a name..." autocomplete="off" />
-    <ul id="suggestions"></ul>
+      <div class="overlay hidden" id="overlay"></div>
 
-    <label for="seasonSelect">Select Season:</label>
-    <select id="seasonSelect"></select>
-    </div></div>
-  
+      <!--The Search Toolbar-->
+      <div class="search-popup hidden" id="searchPopup">
+        <input type="text" id="searchInput" placeholder="Type a name..." autocomplete="off" /> <!--Player Inputm autocomplete is for browser not to remember the values entered-->
+        <ul id="suggestions"></ul>
+
+        <label for="seasonSelect">Select Season:</label>
+        <select id="seasonSelect"></select>
+      </div>
+    </div>
   </header>
 
+
+  <!--Navigation Bar-->
   <nav>
     <a href="interact_map.html">General</a>
     <a href="Dashboard.html">Dashboard</a>
@@ -45,43 +74,42 @@
     <a href="Homepage.html#contact">Contact</a>
     <a href="Glossary.html">Glossary</a>
   </nav>
+  <!--End of Header-->
+  <select id="playerSelect" style="display: none;"></select> <!--Creats a dropdown list in the search toolbar-->
 
-  <select id="playerSelect" style="display: none;"></select>
 
-  <!--Enf of Critical Section of Website-->
-
-  <!--Start Section 2-->
-
-  <!--Player Information containers-->
-  <div class="flex-container">
+  <!--Selected Player Information-->
+  <div class="flex-container"> <!--HT01-->
     <div class="small_box">  
-      <!--I want to add a picture of the player according to who we have chosen-->
-      <img id="playerPhoto" src="" width="100%" height="100%" style="border-radius: 10px; object-fit: cover;">
-      <!--I want to add a player description according to who we have chosen-->
+      <img id="playerPhoto" src="" width="100%" height="100%" style="border-radius: 10px; object-fit: cover;"> <!--Picture of the player-->
     </div>
-    <div class="big_box" id="playerDetails" width="100%" ></div>
+    <div class="big_box" id="playerDetails" width="100%" ></div> <!--Information of the plater-->
   </div>
-  
-  <!--Map Chart-->
-  <svg id="map" width="1160" height="500"></svg>
+  <!--Enf of selected Player Information-->
 
-  <!--Radio Chart & Points Chart-->
-  <div class="player_stat_boxs">
+  
+  <!--Map Chart (USA + CANADA)-->
+  <svg id="map" width="1160" height="500"></svg> <!--HT02-->
+
+
+  <!--Graphics and Charts showing the selected player's performance-->
+  <div class="player_stat_boxs"> <!--HT02-->
     <div class="charts_boxs">
-      <svg id="pieChart" width="300" height="300"></svg>
+      <svg id="pieChart" width="300" height="300"></svg><!--HT02-->
     </div>
   
     <div class="charts_boxs">
-      <svg id="player_solo_radiograph" width="300" height="300"></svg>
+      <svg id="player_solo_radiograph" width="300" height="300"></svg><!--HT02-->
     </div>
   </div>
+  <!--End of Graphics and Charts showing the selected player's performance-->
 
-<!--Player selected information-->
+
+<!--Selected Similar and Teammate Player Information-->
   <div class="player_stat_boxs">
     <div class="charts_boxs">
       <div class="circle-overlay1">
         <img id="Similar_player_picture" src="" alt ="Missing Picture" class="player-icon">
-        <!--Why is it not working?-->
       </div>
       <div id="similar-player-info" class="player-description-box1"></div>
     </div>
@@ -92,13 +120,14 @@
       <div id="teammate-info" class="player-description-box"></div>
     </div>
   </div>
+  <!--End of Selected Similar and Teammate Player Information _ For this section : refer to HT02 for documentation-->
   
 
-  <!--Radio Chart & Points Chart with add choice-->
+  <!--Graphics and Charts showing the selected player's performance in comparison to 2 other players-->
+  <svg id="map" width="1160" height="300"></svg> <!--HT02-->
+    <!--Other Place for line chart-->
+    <!--Player 16:9 Picture-->
 
-  <!--Other Place for line chart-->
-  <svg id="map" width="1160" height="300"></svg> <!--Player 16:9 Picture-->
-  
   <div class="player_stat_boxs">
     <div class="charts_boxs">
       <svg id="radio-chart" width="500" height="300"></svg>
@@ -107,15 +136,20 @@
       <svg id="rebounds" width="500" height="300"></svg>
     </div>
   </div>
+  <!--Enf of Graphics and Charts showing the selected player's performance in comparison to 2 other players-->
 
-  <a href="interact_map.html" class="info-button" target="_blank">More Players Comparisons</a>
+
+  <a href="interact_map.html" class="info-button" target="_blank">More Players Comparisons</a><!--Button to general analysis of players-->
   
-  <!--Add space for More info button to appear clearly-->
-  <br>
-  <br>
+  <br>  <!--Adds space for More info button to appear clearly-->
 
-  <script src="script.js"></script>
+  <!--Footer-->
+  <footer>
+    &copy; 2025 NBA Data Visualization Platform. No rights reserved.
+  </footer>
+  <!--End of Footer-->
 
+  <script src="script.js"></script><!--Links to the js file & d3-->
 
 </body>
 </html>

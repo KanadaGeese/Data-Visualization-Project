@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!--Notes on Comments : For some sections, we may add an ID number to detail. 
+- HT : HTML document
+- JS : Javascript document
+- CS : CSS document
+
+Follwing ID giving : XX(3)NN
+- X: letter
+- N : Number 
+
+JS(3) can be given for D3.js explanation-->
+
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" /> <!--tag which sets character encoding-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!--For screen responsive sizing-->
   <title>NBA Organization - Homepage</title>
-  <link rel="stylesheet" href="Homepagestyle.css" />
-  <link rel="icon" type="image/png" href="NBA_logo.png" />
+  <link rel="stylesheet" href="Homepagestyle.css" /><!--links to the css file-->
+  <link rel="icon" type="image/png" href="NBA_logo.png"/>
 </head>
+
+
 <body>
+  <!--Header of the website page-->
+  <!--HT03-->
   <header>
     <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
     <p>The unofficial homepage of the National Basketball Data Visualization Institute</p>
@@ -16,7 +33,7 @@
     </a>
   </header>
 
-  
+  <!--The navigation Bar-->
   <nav>
     <a href="interact_map.html">General</a>
     <a href="Dashboard.html">Dashboard</a>
@@ -27,16 +44,21 @@
     <a href="Glossary.html">Glossary</a>
 
   </nav>
+  <!--End of the Header of website page-->
 
+  <!--Main Section with information, HT04-->
   <div class="content">
+
+
     <section id="about">
       <h2>About the NBA</h2>
       <p>The National Basketball Association (NBA) is a professional basketball league in North America composed of 30 teams (29 in the United States and 1 in Canada). It is widely considered to be the premier men's professional basketball league in the world.</p>
-      <a href="https://en.wikipedia.org/wiki/National_Basketball_Association" 
-      class="info-button" target="_blank">
-      More Information
-   </a>
+      
+      
+      <a href="https://en.wikipedia.org/wiki/National_Basketball_Association" class="info-button" target="_blank">More Information</a>
     </section>
+
+
 
     <section id="teams">
       <h2>NBA Teams</h2>
@@ -50,26 +72,38 @@
         <a href="https://www.nba.com/nets" target="_blank"><img src="https://loodibee.com/wp-content/uploads/nba-brooklyn-nets-logo-300x300.png" alt="Nets"></a>
         <a href="https://www.nba.com/suns" target="_blank"><img src="https://loodibee.com/wp-content/uploads/nba-phoenix-suns-logo-300x300.png" alt="Suns"></a>
         <a href="https://www.nba.com/mavericks" target="_blank"><img src="https://loodibee.com/wp-content/uploads/nba-dallas-mavericks-logo-300x300.png" alt="Mavericks"></a>
-    </div>
-    <a href="https://en.wikipedia.org/wiki/National_Basketball_Association#Teams" 
-    class="info-button" target="_blank">
-    More Information</a> 
+      </div>
+
+
+      <a href="https://en.wikipedia.org/wiki/National_Basketball_Association#Teams" class="info-button" target="_blank">More Information</a> 
     </section>
+
+
 
     <section id="history">
       <h2>NBA History</h2>
       <p>Founded in 1946, the NBA has grown into a global sports and media organization. Legendary players like Michael Jordan, LeBron James, Kobe Bryant, and Magic Johnson have left an indelible mark on the league and its fans.</p>
+      
+      
       <a href="https://en.wikipedia.org/wiki/National_Basketball_Association#History" class="info-button" target="_blank">More Information</a>
     </section>
+
+
 
     <section id="contact">
       <h2>Contact Us</h2>
       <p>Have questions or want to learn more about the NBA? Reach out at <a href="mailto:info@nba.com">info@nba.com</a>.</p>
     </section>
   </div>
+  <!--End of Main Section with information-->
 
+
+  <!--Footer-->
   <footer>
     &copy; 2025 NBA Data Visualization Platform. No rights reserved.
   </footer>
+  <!--End of footer-->
+
+
 </body>
 </html>

@@ -1,14 +1,32 @@
-<!-- Will be a glossary to explain the data analytics-->
 <!DOCTYPE html>
 <html lang="en">
+
+<!--Notes on Comments : For some sections, we may add an ID number to detail. 
+- HT : HTML document
+- JS : Javascript document
+- CS : CSS document
+
+Follwing ID giving : XX(3)NN
+- X: letter
+- N : Number 
+
+JS(3) can be given for D3.js explanation-->
+
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>NBA Organization - Homepage</title>
-  <link rel="stylesheet" href="Homepagestyle.css" />
+
+  <link rel="stylesheet" href="Homepagestyle.css" /> <!--Links to the CSS file.-->
   <link rel="icon" type="image/png" href="NBA_logo.png" />
 </head>
+
 <body>
+  <!--Header of the website-->
+  <!--HT03-->
+
   <header>
     <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
     <p>The unofficial homepage of the National Basketball Data Visualization Institute</p>
@@ -17,6 +35,7 @@
     </a>
   </header>
   
+  <!--Navigation bar-->
   <nav>
     <a href="interact_map.html">General</a>
     <a href="Dashboard.html">Dashboard</a>
@@ -27,7 +46,9 @@
     <a href="Glossary.html">Glossary</a>
 
   </nav>
+  <!--End of header-->
 
+  <!--Table-->
   <div class="content">
   <section id="Glossary">
     <h2>Glossary</h2>
@@ -73,9 +94,19 @@
             <tr><td>Season</td><td>Tournament Year</td></tr>
           </tbody>
         </table>
-      </div>    <a href="https://www.basketball-reference.com/" 
-    class="info-button" target="_blank">
-    More Information</a>
-  </section>
-</div>
+      </div> 
+      <!--End of table-->
+
+      <!--More information button-->
+      <a href="https://www.basketball-reference.com/" class="info-button" target="_blank">More Information</a>
+    </section>
+  </div>
+
+  <!--Footer-->
+  <footer>
+    &copy; 2025 NBA Data Visualization Platform. No rights reserved.
+  </footer>
+  <!--End of Footer-->
+
+  
 </html>
