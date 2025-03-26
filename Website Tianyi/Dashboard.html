@@ -13,10 +13,12 @@
 </head>
 
 <body>
+  <!--The critical Point of the Website-->
   <header>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
 
+    <img id="homepage_img" src="NBA_logo.png" height="100px">
     <div id="controls">
     <button id="openSearch" class="search-button" title="Search">
     <i class="fas fa-search"></i></button>
@@ -30,7 +32,6 @@
     <select id="seasonSelect"></select>
     </div></div>
   
-    <script src="script.js"></script>
   </header>
 
   <nav>
@@ -43,27 +44,76 @@
     <a href="Glossary.html">Glossary</a>
   </nav>
 
-    <select id="playerSelect" style="display: none;"></select>
+  <select id="playerSelect" style="display: none;"></select>
 
-  
-    <h1>NBA Player Stats Visualization</h1>
+  <!--Enf of Critical Section of Website-->
 
-    <h2>1. Map of Where Player Played</h2>
-    <svg id="map" width="800" height="400"></svg>
+  <!--Start Section 2-->
 
-    <h2>2. Player Comparison</h2>
-    <div class="charts">
-      <svg id="pointsMinutes" width="500" height="300"></svg>
-      <svg id="rebounds" width="500" height="300"></svg>
+  <!--Player Information containers-->
+  <div class="flex-container">
+    <div class="small_box">  
+      <!--I want to add a picture of the player according to who we have chosen-->
+      <img id="playerPhoto" src="" width="100%" height="100%" style="border-radius: 10px; object-fit: cover;">
+      <!--I want to add a player description according to who we have chosen-->
     </div>
+    <div class="big_box" id="playerDetails" width="100%" ></div>
+  </div>
+  
+  <!--Map Chart-->
+  <svg id="map" width="1160" height="500"></svg>
 
-    <h2>3. Shot Type Pie Chart</h2>
-    <svg id="pieChart" width="400" height="400"></svg>
+  <!--Radio Chart & Points Chart-->
+  <div class="player_stat_boxs">
+    <div class="charts_boxs">
+      <svg id="pieChart" width="300" height="300"></svg>
+    </div>
+  
+    <div class="charts_boxs">
+      <svg id="player_solo_radiograph" width="300" height="300"></svg>
+    </div>
   </div>
 
-  <div id="compareSummaries" class="compare-cards" style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;"></div>
+<!--Player selected information-->
+  <div class="player_stat_boxs">
+    <div class="charts_boxs">
+      <div class="circle-overlay1">
+        <img id="Similar_player_picture" src="" alt ="Missing Picture" class="player-icon">
+        <!--Why is it not working?-->
+      </div>
+      <div id="similar-player-info" class="player-description-box1"></div>
+    </div>
+    <div class="charts_boxs">
+      <div class="circle-overlay">
+        <img id="Teammate_picture" src="" class="player-icon">
+      </div>
+      <div id="teammate-info" class="player-description-box"></div>
+    </div>
+  </div>
+  
 
+  <!--Radio Chart & Points Chart with add choice-->
+
+  <!--Other Place for line chart-->
+  <svg id="map" width="1160" height="300"></svg> <!--Player 16:9 Picture-->
+  
+  <div class="player_stat_boxs">
+    <div class="charts_boxs">
+      <svg id="radio-chart" width="500" height="300"></svg>
+    </div>
+    <div class="charts_boxs">  
+      <svg id="rebounds" width="500" height="300"></svg>
+    </div>
+  </div>
+
+  <a href="interact_map.html" class="info-button" target="_blank">More Players Comparisons</a>
+  
+  <!--Add space for More info button to appear clearly-->
+  <br>
+  <br>
 
   <script src="script.js"></script>
+
+
 </body>
 </html>

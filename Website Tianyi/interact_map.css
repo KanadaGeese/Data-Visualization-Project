@@ -1,6 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    padding: 30px;
     background: #f4f4f4;
     text-align: center;
   }
@@ -66,3 +65,10 @@ h1 {
   nav a:hover {
     text-decoration: underline;
   }
+/*Homepage Image*/
+#homepage_img {
+  position: absolute;
+  padding: 10px;
+  left: 10px;
+  top: 0px;
+}
