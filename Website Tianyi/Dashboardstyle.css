@@ -3,9 +3,48 @@ body {
     background: #f4f4f4;
     margin: 0;
     text-align: center;
-    padding: 20px;
 }
-  
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px;
+  height: 80px;
+  background-color: #1d428a;
+  color: white;
+}
+
+
+.logo-link{
+  position: absolute;
+  left: 20px;
+  display: block;
+}
+
+.logo-link img{
+  max-height: 80px; 
+  height: auto;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.header-text {
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0; 
+  font-size: 24px;
+}
+
+.header-text p {
+  margin: 5px 0 0 0; 
+  font-size: 14px;
+}
+
 .container {
   max-width: 700px;
   margin: auto;

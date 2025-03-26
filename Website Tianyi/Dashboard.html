@@ -13,25 +13,34 @@
 </head>
 
 <body>
-  <header>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
+  <div class="header">
+    <a href="Homepage.html" class="logo-link">
+      <img src="NBA_logo.png" alt="Logo">
+    </a>
 
-    <div id="controls">
+    <div class="header-text">
+      <h1><span style="color: whitesmoke">NBA Data Visualization Platform</span></h1>
+      <p>The unofficial homepage of the National Basketball Data Visualization Institute</p>
+    </div>
+
+    <div id="controls"></div>
+
     <button id="openSearch" class="search-button" title="Search">
-    <i class="fas fa-search"></i></button>
+      <i class="fas fa-search"></i>
+    </button>
 
     <div class="overlay hidden" id="overlay"></div>
-    <div class="search-popup hidden" id="searchPopup">
-    <input type="text" id="searchInput" placeholder="Type a name..." autocomplete="off" />
-    <ul id="suggestions"></ul>
 
-    <label for="seasonSelect">Select Season:</label>
-    <select id="seasonSelect"></select>
-    </div></div>
-  
-    <script src="script.js"></script>
-  </header>
+    <div class="search-popup hidden" id="searchPopup">
+      <input type="text" id="searchInput" placeholder="Type a name..." autocomplete="off" />
+      <ul id="suggestions"></ul>
+
+      <label for="seasonSelect">Select Season:</label>
+      <select id="seasonSelect"></select>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 
   <nav>
     <a href="interact_map.html">General</a>

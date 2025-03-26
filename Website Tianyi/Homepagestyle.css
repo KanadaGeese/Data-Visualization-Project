@@ -21,12 +21,46 @@ body {
   background: #f7f7f7;
   color: #333;
 }
-header {
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px;
+  height: 80px;
   background-color: #1d428a;
   color: white;
-  padding: 20px;
+}
+
+
+.logo-link{
+  position: absolute;
+  left: 20px;
+  display: block;
+}
+
+.logo-link img{
+  max-height: 80px; 
+  height: auto;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.header-text {
   text-align: center;
 }
+
+.header h1 {
+  margin: 0; 
+  font-size: 24px;
+}
+
+.header-text p {
+  margin: 5px 0 0 0; 
+  font-size: 14px;
+}
+
 nav {
   background-color: #c8102e;
   display: flex;
