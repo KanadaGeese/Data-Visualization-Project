@@ -54,10 +54,10 @@
   <div class="flex-container">
     <div class="small_box">  
       <!--I want to add a picture of the player according to who we have chosen-->
-      <img src="images/players/Kobe Bryant.jpg" alt="Kobe Bryant" class="player-photo">
+      <img id="playerPhoto" src="" width="100%" height="100%" style="border-radius: 10px; object-fit: cover;">
       <!--I want to add a player description according to who we have chosen-->
-      <p>Kobe Bryant<br>Points: 30.1</p></div>
-    <div class="big_box">This container will have player description. The one on the right side, his picture</div>
+    </div>
+    <div class="big_box" id="playerDetails" width="100%" ></div>
   </div>
   
   <!--Map Chart-->
@@ -65,24 +65,33 @@
 
   <!--Radio Chart & Points Chart-->
   <div class="player_stat_boxs">
-  <div class="charts_boxs">
-    <svg id="pieChart" width="300" height="300"></svg>
-
+    <div class="charts_boxs">
+      <svg id="pieChart" width="300" height="300"></svg>
+    </div>
+  
+    <div class="charts_boxs">
+      <svg id="player_solo_radiograph" width="300" height="300"></svg>
+    </div>
   </div>
-  <div class="charts_boxs">The Point Counts Chart</div>
-  </div>
 
-  <!--Radio Chart & Points Chart-->
+<!--Player selected information-->
   <div class="player_stat_boxs">
-    <div class="charts_boxs">Selected Player With similar Performance
-      <div class="circle-overlay">99</div>
-      <img src="images/players/Kobe Bryant.jpg" class="player-icon">
+    <div class="charts_boxs">
+      <div class="circle-overlay"> <!--Why is it not working?-->
+        <img id="Similar_player_picture" src="" class="player-icon">
+      </div>
+      <div id="similar-player-info" class="player-description-box"></div>
     </div>
-    <div class="charts_boxs">Selected Player in same team with identical Position
-      <div class="circle-overlay">98</div>
-      <img src="images/players/Kobe Bryant.jpg" class="player-icon">
+    <div class="charts_boxs">
+      <div class="circle-overlay">
+        <img id="Teammate_picture" src="" class="player-icon">
+      </div>
+      <div id="teammate-info" class="player-description-box"></div>
     </div>
   </div>
+  
+
+    <!--Radio Chart & Points Chart with add choice-->
   <div id="add_player_to_compare">
     <input type="text" id="searchInput" placeholder="Add someone to Compare" autocomplete="off" />
     <ul id="suggestions"></ul>
