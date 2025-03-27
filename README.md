@@ -28,3 +28,5 @@ The work is mainly divided and is open to all team members. However, we can high
     - ```svg``` better fits our use
 - HT03 : We included the Navigation Bar as it appears on all the website's pages
 - HT04 : Basically each sections has information and text or images.
+- CS02 : There are two overlay css because we figured that is merged to one. Both icons end in the same place whoch triggers designing issues.
+

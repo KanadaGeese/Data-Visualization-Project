@@ -1,19 +1,4 @@
-.info-button {
-  display: inline-block;
-  padding: 10px 18px;
-  background-color: #1d428a;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: 0.3s ease;
-}
-
-.info-button:hover {
-  background-color: #c8102e;
-  text-decoration: underline;
-}
-
+/*Header of the website*/
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -42,12 +27,17 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
-.content {
+/*End of Header of the website*/
+
+/*Body :*/
+.content { /*Formats the section : content in which we have all the bla bla*/
   padding: 40px;
   max-width: 1000px;
   margin: auto;
 }
-h1, h2 {
+
+
+h1, h2 { /*Formats all the section titles*/
   color: #1d428a;
 }
 .team-logos {
@@ -67,16 +57,28 @@ h1, h2 {
   height: 100%;
   object-fit: contain;
 }
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #1d428a;
+
+
+.info-button { /*Each more info button*/
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #1d428a;
   color: white;
-  margin-top: 40px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s ease;
 }
 
+.info-button:hover { /*Each more info button*/
+  background-color: #c8102e;
+  text-decoration: underline;
+}
+/*End*/
 
-/*Glossary */
+
+
+/*Glossary.html*/
 .table-container001 {
   overflow-x: auto;
   margin: 40px auto;
@@ -114,4 +116,13 @@ tr:hover {
   padding: 10px;
   left: 10px;
   top: 0px;
+}
+
+/*Footer*/
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #1d428a;
+  color: white;
+  margin-top: 40px;
 }
