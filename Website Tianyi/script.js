@@ -1,5 +1,6 @@
-// script.js
+// The following file is linked with the dashboard html file
 
+// We are providing information on the Basket Ball club to plot them on a graph
 const TEAM_MAP = {
     "ATL": { city: "Atlanta", lat: 33.7573, lon: -84.3963 },
     "BOS": { city: "Boston", lat: 42.3663, lon: -71.0622 },
@@ -35,7 +36,7 @@ const TEAM_MAP = {
   
   // Load CSV data
   let data;
-  d3.csv("../EDA NBA/nba_player_stats_C_Rami.csv", d3.autoType).then(dataset => {
+  d3.csv("../EDA NBA/nba_player_stats_cleaned_v1.1.0.csv", d3.autoType).then(dataset => {
     data = dataset;
   
     const players = Array.from(new Set(data.map(d => d.Player))).sort();
@@ -67,6 +68,7 @@ const TEAM_MAP = {
     updateSeasonOptions();
     updateAll();
     });
+
 
   function updateSeasonOptions() {
     const player = d3.select("#playerSelect").property("value");
@@ -255,10 +257,10 @@ const TEAM_MAP = {
     
   
     // Radar Chart Stats
-    const stats = ["Points", "MP", "TRB", "AST", "FG%"];
+    const stats = ["uPER", "TS%", "FT%", "PIE", "FG%"];
     const radarData = compareData.map(p => ({
       name: p.Player,
-      values: stats.map(stat => stat === "FG%" ? (p["FG%"] * 100) : p[stat])
+      values: stats.map(stat => stat === "PIE" ? (p["PIE"]*1000) : p[stat])
     }));
   
     const svg = d3.select("#radio-chart");
@@ -515,8 +517,8 @@ function drawPlayerRadar(playerRow) {
   const svg = d3.select("#player_solo_radiograph");
   svg.selectAll("*").remove();
 
-  const stats = ["Points", "MP", "TRB", "AST", "STL", "BLK", "TOV", "FG%"];
-  const values = stats.map(stat => stat === "FG%" ? (playerRow[stat] * 100) : playerRow[stat]);
+  const stats = ["uPER", "TS%", "FT%", "PIE", "eFG%","FT%"];
+  const values = stats.map(stat => stat === "PIE" ? (playerRow[stat] * 1000) : playerRow[stat]);
 
   const width = +svg.attr("width");
   const height = +svg.attr("height");
