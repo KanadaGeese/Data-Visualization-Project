@@ -40,21 +40,13 @@ const TEAM_MAP = {
     data = dataset;
   
     const players = Array.from(new Set(data.map(d => d.Player))).sort();
-    const seasons = Array.from(new Set(data.map(d => d.Season))).sort((a, b) => a - b);
   
     const playerSelect = d3.select("#playerSelect");
-    const seasonSelect = d3.select("#seasonSelect");
-    
 
+    updateAll("LeBron James", 2020); // Automatic pre-fill
   
     playerSelect.selectAll("option")
       .data(players)
-      .enter()
-      .append("option")
-      .text(d => d);
-  
-    seasonSelect.selectAll("option")
-      .data(seasons)
       .enter()
       .append("option")
       .text(d => d);
@@ -63,37 +55,17 @@ const TEAM_MAP = {
       updateSeasonOptions();
       updateAll();
     });
-      
-    seasonSelect.on("change", updateAll);
-    updateSeasonOptions();
-    updateAll();
     });
-
-
-  function updateSeasonOptions() {
-    const player = d3.select("#playerSelect").property("value");
-    const playerSeasons = data
-      .filter(d => d.Player === player)
-      .map(d => d.Season);
   
-    const uniqueSeasons = Array.from(new Set(playerSeasons)).sort((a, b) => a - b);
+  function updateAll(p = null, s = null) {
+    const player = p ?? d3.select("#playerSelect").property("value");
+    const season = s ?? null;
   
-    const seasonSelect = d3.select("#seasonSelect");
-    seasonSelect.selectAll("option").remove();
-  
-    seasonSelect.selectAll("option")
-      .data(uniqueSeasons)
-      .enter()
-      .append("option")
-      .text(d => d);
-  }
-  
-  function updateAll() {
-    const player = d3.select("#playerSelect").property("value");
-    const season = +d3.select("#seasonSelect").property("value");
+    if (!player || !season) return;
   
     const filtered = data.filter(d => d.Player === player && d.Season === season);
     if (filtered.length === 0) return;
+  
     const playerRow = filtered[0];
   
     drawMap(player);
@@ -443,12 +415,32 @@ const suggestionsBox = document.getElementById('suggestions');
 let names = [];
 
 // Fetch and parse only the first column (name)
+// fetch('../EDA NBA/nba_player_stats_C_Rami.csv')
+//   .then(res => res.text())
+//   .then(data => {
+//     const lines = data.split('\n');
+//     names = lines.map(line => line.split(',')[0].trim()).filter(n => n);
+//   });
+
+// Fetch and parse Player, Season combinations
 fetch('../EDA NBA/nba_player_stats_C_Rami.csv')
   .then(res => res.text())
   .then(data => {
-    const lines = data.split('\n');
-    names = lines.map(line => line.split(',')[0].trim()).filter(n => n);
+    const lines = data.split('\n').slice(1); // Skip header
+    const seen = new Set();
+    names = lines.map(line => {
+      const parts = line.split(',');
+      const player = parts[0]?.trim();
+      const season = parts.at(-1)?.trim();  // last column is likely Season
+      const combined = `${player}, ${season}`;
+      if (player && season && !seen.has(combined)) {
+        seen.add(combined);
+        return combined;
+      }
+      return null;
+    }).filter(Boolean);
   });
+
 
 
   
@@ -470,47 +462,30 @@ overlay.addEventListener('click', () => {
 // Live filter suggestions
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase();
-  const filtered = names.filter(name => name.toLowerCase().includes(query)).slice(0, 10);
-  suggestionsBox.innerHTML = filtered.map(name => `<li>${name}</li>`).join('');
-});
-
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = names.filter(name => name.toLowerCase().includes(query)).slice(0, 10);
-
-  // Clear previous suggestions
+  const filtered = names.filter(pair => pair.toLowerCase().includes(query)).slice(0, 10);
   suggestionsBox.innerHTML = '';
 
-  // Create clickable suggestions
-  filtered.forEach(name => {
+  filtered.forEach(nameSeason => {
     const li = document.createElement('li');
-    li.textContent = name;
+    li.textContent = nameSeason;
     li.addEventListener('click', () => {
-      searchInput.value = name;
+      searchInput.value = nameSeason;
       overlay.classList.add('hidden');
       popup.classList.add('hidden');
       suggestionsBox.innerHTML = '';
-    
-      // Select the name in the hidden player dropdown
-      d3.select("#playerSelect").property("value", name);
-    
-      // Update season dropdown based on this player
-      updateSeasonOptions();
-    
-      // Automatically select the latest season
-      const seasonOptions = d3.select("#seasonSelect").selectAll("option").nodes();
-      if (seasonOptions.length > 0) {
-        const lastSeason = seasonOptions[seasonOptions.length - 1].value;
-        d3.select("#seasonSelect").property("value", lastSeason);
-      }
-    
-      // Trigger the full dashboard update
-      updateAll();
+
+      const [player, season] = nameSeason.split(',').map(s => s.trim());
+
+      d3.select("#playerSelect").property("value", player);
+      setTimeout(() => {
+        updateAll(player, +season);
+      }, 50);
+      
     });
-    
     suggestionsBox.appendChild(li);
   });
 });
+
 
 
 function drawPlayerRadar(playerRow) {
