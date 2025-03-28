@@ -5,9 +5,9 @@ Tianyi, Rami & Martine
 The following project aims to track the NBA players' such as their performance and their movements. It has been constructed to give valuable visualization and insights about performances of each player within teams during their NBA Career.
 
 ## Team members And roles
-The work is mainly divided and is open to all team members. However, we can highlight the following : 
-- Martine : Web developper
-- Rami : Idea Man with the Statistic part
+Self service working method meaning that peers select the tasks they want to accomplish. However, we can highlight the following : 
+- Martine : Has mainly been a Web developper
+- Rami : Idea Man with the Statistic part & has worked on EDA
 - Tianyi : -/
 ## Sources : 
 [BasketBall Reference](https://www.basketball-reference.com/)
