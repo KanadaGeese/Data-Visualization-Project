@@ -47,7 +47,7 @@ function drawSeason(season) {
 
   const x = d3.scaleLinear()
     .domain([0, d3.max(data, d => d[1])])
-    .range([0, chartWidth]);
+    .range([0, chartWidth-70]);
 
   const y = d3.scaleBand()
     .domain(players)
