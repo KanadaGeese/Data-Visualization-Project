@@ -72,3 +72,12 @@ h1 {
   left: 10px;
   top: 0px;
 }
+
+/*Footer which is here for each css file*/
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #1d428a;
+  color: white;
+  margin-top: 40px;
+}
