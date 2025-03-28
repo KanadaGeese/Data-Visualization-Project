@@ -118,6 +118,13 @@ tr:hover {
   top: 0px;
 }
 
+/*Glossary links Personalization*/
+.glos_indi {
+  background-color: #FAEAA9;
+  text-decoration: none;
+  color: blue; 
+}
+
 /*Footer*/
 footer {
   text-align: center;
@@ -126,3 +133,4 @@ footer {
   color: white;
   margin-top: 40px;
 }
+
