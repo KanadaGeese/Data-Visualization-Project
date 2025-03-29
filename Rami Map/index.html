@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NBA Player Journey Map</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+</head>
+<body>
+  <h1>NBA Player Journey Map</h1>
+
+  <div id="controls">
+    <input id="playerInput" type="text" placeholder="Enter Player Name" />
+    <button onclick="startJourney()">Start</button>
+    <button onclick="showAllTeams()">Show All Teams</button>
+  </div>
+
+  <div id="sliderWrapper" style="display:none;">
+    <div id="sliderLabels" class="slider-labels"></div>
+  </div>
+
+  <svg id="map" width="960" height="600"></svg>
+
+  <script src="main.js"></script>
+</body>
+</html>
