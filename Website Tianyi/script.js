@@ -124,9 +124,10 @@ const TEAM_MAP = {
     const width = +svg.attr("width"), height = +svg.attr("height");
   
     const projection = d3.geoMercator()
-      .center([-95, 50])
-      .scale(500)
-      .translate([width / 2, height / 2]);
+  .center([-95, 40])
+  .scale(500)
+  .translate([width / 2, height / 2 + 40]);
+
   
     const path = d3.geoPath().projection(projection);
   

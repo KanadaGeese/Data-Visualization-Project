@@ -11,10 +11,12 @@ header {
 /* Match dashboard nav */
 nav {
   background-color: #c8102e;
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: 30px;
   padding: 15px 0;
+  box-sizing: border-box;
 }
 nav a {
   color: white;
@@ -150,13 +152,15 @@ button:hover {
   fill: #ff5c5c;
 }
 
-/* Footer style to match dashboard */
 footer {
-  text-align: center;
-  padding: 20px;
   background: #1d428a;
   color: white;
-  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px 0;
+  box-sizing: border-box;
 }
 
 #homepage_img {
