@@ -19,6 +19,13 @@ Self service working method meaning that peers select the tasks they want to acc
 - [Access to Github Repository](https://github.com/KanadaGeese/Data-Visualization-Project)
 - [Live Visualization]()
 
+## Related Work
+[Viziball](https://viziball.app/nba/en) : Radar Graph and Basketball Skill comparator Line graph evolution. They inspired us regarding what graphs are relevant to showcase and for the web-design.
+
+[MBTA Visualization](http://mbtaviz.github.io/) : The interactive map has inspired us to reproduce the same to showcase the player's changes throughout the years.
+
+[Discord](https://discord.com/) has been key in the web design with their wonderful search toolbar in the computer Windows app.
+
 ## Project Documentation
 
 - HTO1, CS01 : Flew containers enable containers rearrangement
