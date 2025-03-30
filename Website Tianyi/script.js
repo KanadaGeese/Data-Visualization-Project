@@ -2,7 +2,7 @@
 
 // We are providing information on the Basket Ball club to plot them on a graph
 const TEAM_MAP = {
-  ATL: { city: "Atlanta", lat: 33.755, lon: -84.390 },
+  TL: { city: "Atlanta", lat: 33.755, lon: -84.390 },
   BOS: { city: "Boston", lat: 42.3601, lon: -71.0589 },
   BRK: { city: "Brooklyn", lat: 40.6782, lon: -73.9442 },
   CHA: { city: "Charlotte", lat: 35.2271, lon: -80.8431 },
@@ -120,45 +120,47 @@ const TEAM_MAP = {
   }
   
   function drawMap(player) {
-    const svg = d3.select("#map");
-    svg.selectAll("*").remove();
+    const svg = d3.select("#map").attr("class", "full-map").html(""); // Clear previous map
+    const width = +svg.attr("width"), height = +svg.attr("height");
   
-    const width = +svg.attr("width");
-    const height = +svg.attr("height");
+    const projection = d3.geoMercator()
+      .center([-95, 50])
+      .scale(500)
+      .translate([width / 2, height / 2]);
   
-    const projection = d3.geoAlbersUsa().translate([width / 2, height / 2]).scale(1000);
     const path = d3.geoPath().projection(projection);
   
-    // Load and draw the map
-    d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(us => {
-      const states = topojson.feature(us, us.objects.states).features;
-  
+    Promise.all([
+      d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+      d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json")
+    ]).then(([world, us]) => {
       svg.append("g")
         .selectAll("path")
-        .data(states)
-        .enter()
-        .append("path")
+        .data([...world.features, ...topojson.feature(us, us.objects.states).features])
+        .enter().append("path")
         .attr("d", path)
-        .attr("fill", "#f0f0f0")
-        .attr("stroke", "#999");
+        .attr("fill", d => d.properties ? "#f0f0f0" : "none")
+        .attr("stroke", "#ccc");
   
-      // Plot team cities
-      const playerTeams = data.filter(d => d.Player === player).map(d => d.Team);
-      const cities = Array.from(new Set(playerTeams)).map(code => TEAM_MAP[code]).filter(Boolean);
+      const cities = Array.from(new Set(data.filter(d => d.Player === player).map(d => d.Team)))
+        .map(code => TEAM_MAP[code])
+        .filter(Boolean)
+        .map(d => {
+          const coords = projection([d.lon, d.lat]);
+          return coords ? { ...d, x: coords[0], y: coords[1] } : null;
+        }).filter(Boolean);
   
       svg.selectAll("circle")
         .data(cities)
-        .enter()
-        .append("circle")
-        .attr("cx", d => projection([d.lon, d.lat])[0])
-        .attr("cy", d => projection([d.lon, d.lat])[1])
+        .enter().append("circle")
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y)
         .attr("r", 6)
         .attr("fill", "#4e79a7")
         .append("title")
         .text(d => d.city);
     });
-  }
-  
+  }  
     
   function drawComparison(playerRow) {
     d3.select("#radio-chart").selectAll("*").remove();
