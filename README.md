@@ -1,19 +1,27 @@
 # Data-Analysis-Project
 Tianyi, Rami & Martine
 
+To our dear readers, you also may want to read the project's wiki :
+- Progress_log
+- Website_PATCH notes
+- Scoping Document
+
 ## Project Name : NBA Player follow-up
-The following project aims to track the NBA players' such as their performance and their movements. It has been constructed to give valuable visualization and insights about performances of each player within teams during their NBA Career.
+The following project aims to track the NBA players' such as their performance and their movements. It has been built in order to provide valuable visualization and insights about performances of each player within teams during their NBA Career.
+## Problem Statement
+
+How can we help users explore the distribution and evolution of NBA player performance over time throught engaging, interactive geographic and statistical visualizations?
 
 ## Team members And roles
 Self service working method meaning that peers select the tasks they want to accomplish. However, we can highlight the following : 
-- Martine : Has mainly been a Web developper
+- Martine : Has mainly been a Web developper & did map animations
 - Rami : Idea Man with the Statistic part & has worked on EDA
-- Tianyi : -/
+- Tianyi : Worked with D3.js
 ## Sources : 
 [BasketBall Reference](https://www.basketball-reference.com/)
 
 ## Credits
-- Zied Bouyahya for the Web-Scrapping
+- Zied Bouyahya for the Web-Scraping
 
 ## More information : 
 - [Access to Github Repository](https://github.com/KanadaGeese/Data-Visualization-Project)
