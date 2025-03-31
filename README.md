@@ -1,6 +1,8 @@
 # Data-Analysis-Project
 Tianyi, Rami & Martine
 
+[Link to the website](https://kanadageese.github.io/Data-Visualization-Project/)
+
 To our dear readers, you also may want to read the project's wiki :
 - Progress_log
 - Website_PATCH notes
