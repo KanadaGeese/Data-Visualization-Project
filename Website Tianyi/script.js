@@ -422,13 +422,6 @@ const suggestionsBox = document.getElementById('suggestions');
 
 let names = [];
 
-// Fetch and parse only the first column (name)
-// fetch('../EDA NBA/nba_player_stats_C_Rami.csv')
-//   .then(res => res.text())
-//   .then(data => {
-//     const lines = data.split('\n');
-//     names = lines.map(line => line.split(',')[0].trim()).filter(n => n);
-//   });
 
 // Fetch and parse Player, Season combinations
 fetch('../EDA NBA/nba_player_stats_C_Rami.csv')

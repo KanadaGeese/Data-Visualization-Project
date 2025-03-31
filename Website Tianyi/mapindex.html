@@ -27,7 +27,8 @@
 
   <!-- Controls -->
   <div id="controls">
-    <input id="playerInput" type="text" placeholder="Enter Player Name" />
+    <input id="playerInput" type="text" placeholder="Enter Player Name" oninput="suggestPlayers()" autocomplete="off" />
+    <div id="suggestions" class="suggestion-box"></div>
     <button onclick="startJourney()">Start</button>
     <button onclick="showAllTeams()">Show All Teams</button>
   </div>
@@ -39,6 +40,9 @@
 
   <!-- Map -->
   <svg id="map" width="960" height="600"></svg>
+
+  <br>
+  <br>
 
   <!-- Map logic -->
   <script src="mapmain.js"></script>

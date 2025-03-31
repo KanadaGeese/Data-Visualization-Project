@@ -44,6 +44,31 @@ const teamCoords = {
   
   let fullData = [];
   let playerSeasons = [];
+
+  let allPlayers = [];
+
+//Live suggestion R
+  function suggestPlayers() {
+    const input = document.getElementById("playerInput");
+    const query = input.value.trim().toLowerCase();
+    const suggestionBox = document.getElementById("suggestions");
+    suggestionBox.innerHTML = "";
+
+    if (query.length === 0) return;
+
+    const matches = allPlayers.filter(name => name.toLowerCase().includes(query)).slice(0, 10);
+
+    matches.forEach(name => {
+      const div = document.createElement("div");
+      div.textContent = name;
+      div.onclick = () => {
+        input.value = name;
+        suggestionBox.innerHTML = "";
+      };
+      suggestionBox.appendChild(div);
+    });
+  }
+
   
   Promise.all([
     d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
@@ -51,6 +76,7 @@ const teamCoords = {
     d3.csv("nba_player_stats_cleaned.csv")
   ]).then(([world, usTopo, data]) => {
     fullData = data;
+    allPlayers = Array.from(new Set(data.map(d => d.Player))).sort();
     svg.append("g").selectAll("path").data(world.features).enter().append("path").attr("class", "country").attr("d", path);
     const states = topojson.feature(usTopo, usTopo.objects.states).features;
     svg.append("g").selectAll("path").data(states).enter().append("path").attr("class", "state-outline").attr("d", path);
