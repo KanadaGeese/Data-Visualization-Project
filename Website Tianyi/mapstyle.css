@@ -40,13 +40,14 @@ body {
 }
 
 /* General Headings */
-h1 {
+header h1 {
   background-color: #1d428a;
   color: white;
-  padding: 20px ;
+  padding: 20px;
   text-align: center;
   width: 100%;
   box-sizing: border-box;
+  margin: 0;
 }
 
 /* Controls and Inputs */
@@ -129,7 +130,13 @@ button:hover {
 
 .state-outline {
   fill: none;
-  stroke: #bbb;
+  stroke: #444;
+  stroke-width: 0.7;
+  pointer-events: none;
+}
+
+.state-outline:hover {
+  stroke: #222;
 }
 
 /* Team Logos and Nodes */
