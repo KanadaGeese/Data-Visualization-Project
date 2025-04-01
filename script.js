@@ -442,7 +442,7 @@ fetch('nba_player_stats_cleaned.csv')
     names = lines.map(line => {
       const parts = line.split(',');
       const player = parts[0]?.trim();
-      const season = parts.at(-1)?.trim();  // last column is likely Season
+      const season = parts.at(-4)?.trim();  // last column is likely Season
       const combined = `${player}, ${season}`;
       if (player && season && !seen.has(combined)) {
         seen.add(combined);
