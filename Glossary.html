@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Notes on Comments : For some sections, we may add an ID number to detail. 
+- HT : HTML document
+- JS : Javascript document
+- CS : CSS document
+
+Follwing ID giving : XX(3)NN
+- X: letter
+- N : Number 
+
+JS(3) can be given for D3.js explanation-->
+
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>NBA Organization - Homepage</title>
+
+  <link rel="stylesheet" href="Homepagestyle.css" /> <!--Links to the CSS file.-->
+  <link rel="icon" type="image/png" href="NBA_logo.png" />
+</head>
+
+<body>
+  <!--Header of the website-->
+  <!--HT03-->
+
+  <header>
+    <h1><span style="color : whitesmoke">NBA Data Visualization Platform</span></h1>
+    <a  href = "https://github.com/KanadaGeese/Data-Visualization-Project" class="links">This is a Github Hosted Project</a>
+    <a href="index.html">    
+      <img id="homepage_img" src="NBA_logo.png" height="100px">
+    </a>
+  </header>
+  
+  <!--Navigation bar-->
+  <nav>
+    <a href="index.html">Homepage</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="interact_map.html">Top 10 Simulation</a>
+    <a href="mapindex.html">Player Journey Map</a>
+    <a href="Glossary.html">Glossary</a>
+  </nav>
+
+  <!--End of header-->
+
+  <!--Table-->
+  <div class="content">
+  <section id="Glossary">
+    <h2>Glossary</h2>
+    <div class="table-container001">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Player</td><td>---</td></tr>
+            <tr><td>Team</td><td>---</td></tr>
+            <tr><td>Points</td><td>---</td></tr>
+            <tr><td>Pos</td><td>Position</td></tr>
+            <tr><td>G</td><td>Game Played</td></tr>
+            <tr><td>GS</td><td>Game Started</td></tr>
+            <tr><td>MP</td><td>Minutes Played</td></tr>
+            <tr><td>FG</td><td>Field Goals (Excludes Free Throws)</td></tr>
+            <tr><td>FGA</td><td>Field Goal Attempts</td></tr>
+            <tr><td>FG%</td><td>Field Goal Ratio</td></tr>
+            <tr><td>3P</td><td>3-point Field Goals</td></tr>
+            <tr><td>3PA</td><td>3-point Field Goal Attempts</td></tr>
+            <tr><td>3P%</td><td>3-point Field Goal Ratio</td></tr>
+            <tr><td>2P</td><td>2-point Field Goals</td></tr>
+            <tr><td>2PA</td><td>2-point Field Goal Attempts</td></tr>
+            <tr><td>2P%</td><td>2-point Field Goal Ratio</td></tr>
+            <tr><td>eFG%</td><td>Effective Field Goal Percentage</td></tr>
+            <tr><td>FT</td><td>Free Throws</td></tr>
+            <tr><td>FTA</td><td>Free Throw Attempts</td></tr>
+            <tr><td>FT%</td><td>Free Throw Ratio</td></tr>
+            <tr><td>ORB</td><td>Offensive Rebounds</td></tr>
+            <tr><td>DRB</td><td>Defensive Rebounds</td></tr>
+            <tr><td>TRB</td><td>Total Rebounds</td></tr>
+            <tr><td>AST</td><td>Assists</td></tr>
+            <tr><td>STL</td><td>Steals</td></tr>
+            <tr><td>BLK</td><td>Blocks</td></tr>
+            <tr><td>TOV</td><td>Turnovers</td></tr>
+            <tr><td>PF</td><td>Personal Fouls</td></tr>
+            <tr><td>Trp-Dbl</td><td>At least 10 in 3 statistical categories in one game</td></tr>
+            <tr><td>Season</td><td>Tournament Year</td></tr>
+            <tr><td>uPER</td><td>Player Efficiency Rating <a href= "https://www.givemesport.com/nba-advanced-stats-explained/#per-player-efficiency-rating" class="glos_indi">(Computed Value, Not from source)</a></td></tr>
+            <tr><td>PIE</td><td>True Shooting Percentage <a href= "https://www.givemesport.com/nba-advanced-stats-explained/#pie-player-impact-estimate" class="glos_indi">(Computed Value, Not from source)</a></td></tr>
+            <tr><td>TS%</td><td>Player Impact Estimate <a href= "https://www.givemesport.com/nba-advanced-stats-explained/#ts-true-shooting-percentage" class="glos_indi">(Computed Value, Not from source)</a></td></tr>
+          </tbody>
+        </table>
+      </div> 
+      <!--End of table-->
+
+      <!--More information button-->
+      <a href="https://www.basketball-reference.com/" class="info-button" target="_blank">More Information</a>
+    </section>
+  </div>
+
+  <!--Footer-->
+  <footer>
+    <a  href = "https://www.youtube.com/watch?v=xvFZjo5PgG0" class="links">&copy; 2025 NBA Data Visualization Platform. No rights reserved.</a>
+  </footer>
+  <!--End of Footer-->
+
+  
+</html>

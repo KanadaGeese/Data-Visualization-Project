@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="mapstyle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+</head>
+<body>
+
+  <!-- Header with Logo and Title -->
+  <header>
+    <a href="index.html">
+      <img id="homepage_img" src="NBA_logo.png" height="100px" />
+    </a>
+    <h1>NBA Player Journey Map</h1>
+  </header>  
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html#about">Homepage</a>
+    <a href="Dashboard.html">Dashboard</a>
+    <a href="interact_map.html">Top 10 Simulation</a>
+    <a href="mapindex.html">Player Journey Map</a>
+    <a href="Glossary.html">Glossary</a>
+  </nav>
+
+  <!-- Controls -->
+  <div id="controls">
+    <input id="playerInput" type="text" placeholder="Enter Player Name" oninput="suggestPlayers()" autocomplete="off" />
+    <div id="suggestions" class="suggestion-box"></div>
+    <button onclick="startJourney()">Start</button>
+    <button onclick="showAllTeams()">Show All Teams</button>
+  </div>
+
+  <!-- Slider for seasons -->
+  <div id="sliderWrapper" style="display:none;">
+    <div id="sliderLabels" class="slider-labels"></div>
+  </div>
+
+  <!-- Map -->
+  <svg id="map" width="960" height="600"></svg>
+
+  <br>
+  <br>
+
+  <!-- Map logic -->
+  <script src="mapmain.js"></script>
+
+  <footer>
+    &copy; 2025 NBA Data Visualization Platform. No rights reserved.
+  </footer>
+
+</body>
+</html>
