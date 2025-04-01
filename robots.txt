@@ -1,14 +1,37 @@
-Oh hey you! You found out this place?
-YOU SMAAAAAAAART, come and work with us next time!
+# Hey there, curious crawler! Here's your prize:
+You kind smart no? Your super-duper smart
 
-Fun fact : Why are we not official?
-We mailed the NBA but they told us to get fucked.
+# Why did the developer go broke?
+# Because he used up all his cache.
+
+# What do you call a robot that always runs late?
+# A bit behind schedule.
+
+# Googlebot walks into a bar... and indexes everything.
+
+# Why did the Easter Bunny become a programmer?
+# Because he loves hiding eggs in code.
+
+# 01001000 01100001 01110000 01110000 01111001 00100001
+# (That's "Happy!" in binary. You're welcome.)
+
+# Knock knock.
+# Who's there?
+# 403.
+# 403 who?
+# 403-bidden, but you found me anyway!
+
+# What’s a web crawler’s favorite exercise?
+# Site maps.
+
+# BONUS: 🥚 You've unlocked the Forbidden Yolk™. Use it wisely.
 
 Fun Fact about us : 
 - RAMI speaks very well spanish
 - Martine is super duper funny
 - Tianyi is not a racist, I swear. I really swear
 
+We also wanted to thank ZIED for helping us out!
 
 User-agent: *
 Disallow: /
